@@ -4,19 +4,17 @@ LABEL description="Container for GTSAM Python Development"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+## Update packages
+RUN apt-get update -q
+
 ## Install packages
-RUN apt-get update -q && \
-    apt-get install -y \
+RUN apt-get install -y --fix-missing \
     # Python
     software-properties-common \
     # Basic Requirments
     build-essential cmake git python3-pip \
     # GTSAM Dependancies
     libboost-all-dev libtbb-dev
-
-## Python Installation
-RUN add-apt-repository ppa:deadsnakes/ppa && \
-    apt-get install python3.7 -y
 
 ## Install GTSAM
 WORKDIR /tmp
@@ -26,9 +24,9 @@ RUN git clone https://github.com/borglab/gtsam.git && \
     mkdir build && \
     cd build && \
     cmake -DGTSAM_INSTALL_CYTHON_TOOLBOX=ON \
-          -DGTSAM_PYTHON_VERSION=3 \
+          -DGTSAM_PYTHON_VERSION=3.8 \
           .. && \
     make check && \
     make install && \
     cd cython && \
-    python3.7 setup.py install
+    python3 setup.py install

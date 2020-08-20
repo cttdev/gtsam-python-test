@@ -4,7 +4,6 @@ from gtsam import symbol_shorthand_X as X
 import numpy as np
 import time
 
-
 np.random.seed(0)
 
 

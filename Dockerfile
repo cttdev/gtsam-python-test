@@ -16,9 +16,13 @@ RUN apt-get install -y --fix-missing \
     # GTSAM Dependancies
     libboost-all-dev libtbb-dev
 
+## Install Python dependancies
+COPY requirements.txt /
+RUN pip3 install -r requirements.txt
+
 ## Install GTSAM
 WORKDIR /tmp
-RUN git clone https://github.com/borglab/gtsam.git && \
+RUN git clone https://github.com/borglab/gtsam.git --branch 4.0.3 && \
     pip3 install -r gtsam/cython/requirements.txt && \
     cd gtsam && \
     mkdir build && \

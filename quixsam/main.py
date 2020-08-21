@@ -1,16 +1,13 @@
-import gtsam
-from gtsam import symbol_shorthand_L as L
-from gtsam import symbol_shorthand_X as X
-import numpy as np
 import time
 
+import gtsam
+import numpy as np
+from gtsam import symbol_shorthand_L as L
+from gtsam import symbol_shorthand_X as X
+
+from quixsam.mathutils import vector3
+
 np.random.seed(0)
-
-
-def vector3(x, y, z):
-	"""Create 3d double numpy array."""
-	return np.array([x, y, z], dtype=np.float)
-
 
 NUM_NODES = 3 * 60 * 50  # 3 minutes at 50 Hz
 PRIOR_NOISE = gtsam.noiseModel_Diagonal.Sigmas(vector3(1, 1, 1))
